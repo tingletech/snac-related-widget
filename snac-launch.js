@@ -4,23 +4,36 @@
 var SNAC = (typeof SNAC !== 'undefined') ? SNAC : {} ;
 SNAC.related = (typeof SNAC.related !== 'undefined') ? SNAC.related : {};
 
+/* the action happens from the bottom up in source order */
+
+/* add the div with the snac trigger */
 SNAC.related.addDiv = (typeof SNAC.related.addDiv !== 'undefined') ? SNAC.related.addDiv : function(){
-  nd = $('<div title="related">&#x0FC2;</div>');
+  nd = $('<button title="related collections">&#x0FC2;</button>');
   nd.css({
-    position: "absolute", 
+    position: "fixed", 
     bottom: 0, 
-    right: 0, 
-    border: '1px solid', 
-    'font-size': '250%', 
+    'font-size': '150%', 
+    right: 0 /* , 
+    border: '1px solid',
     width: '1em', 
-    'text-align': 'center', 
-    border: '1px solid'
+    'text-align': 'center'  */
   });
   $('body').append(nd);
+  nd.button();
+  // nd.button({icons: {primary: 'ui-icon-circle-triangle-w'}});
+  // jQuery and jQueryUI are set up here
+  
 };
 
 SNAC.related.setstuff = (typeof SNAC.related.setstuff !== 'undefined') ? SNAC.related.setstuff : function(){
-  SNAC.related.addDiv();
+  $('head').append('<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/base/jquery-ui.css" type="text/css" media="all" />');
+  if (typeof jQuery.ui == 'undefined') {
+    jQuery.getScript('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',function(){
+      SNAC.related.addDiv();
+    });
+  } else {
+    SNAC.related.addDiv();
+  }
 };
 
 (function() {
@@ -63,7 +76,7 @@ if ( typeof exports != "undefined" ) {
 }
 
 /**
-Copyright (c) 2011, Regents of the University of California
+Copyright (c) 2012, Regents of the University of California
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without 
