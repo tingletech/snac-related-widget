@@ -4,10 +4,23 @@
 var SNAC = (typeof SNAC !== 'undefined') ? SNAC : {} ;
 SNAC.related = (typeof SNAC.related !== 'undefined') ? SNAC.related : {};
 
-
-SNAC.related.pop = (typeof SNAC.related.pop !== 'undefined') ? SNAC.related.pop : function(){
-  nd = $('<div title="related" style="position: absolute; bottom:0; right:0; border: 1px solid; font-size: 250%; width: 1em; text-align: center; border: 1px solid;">&#x0FC2;</div>');
+SNAC.related.addDiv = (typeof SNAC.related.addDiv !== 'undefined') ? SNAC.related.addDiv : function(){
+  nd = $('<div title="related">&#x0FC2;</div>');
+  nd.css({
+    position: "absolute", 
+    bottom: 0, 
+    right: 0, 
+    border: '1px solid', 
+    'font-size': '250%', 
+    width: '1em', 
+    'text-align': 'center', 
+    border: '1px solid'
+  });
   $('body').append(nd);
+};
+
+SNAC.related.setstuff = (typeof SNAC.related.setstuff !== 'undefined') ? SNAC.related.setstuff : function(){
+  SNAC.related.addDiv();
 };
 
 (function() {
@@ -34,11 +47,11 @@ SNAC.related.pop = (typeof SNAC.related.pop !== 'undefined') ? SNAC.related.pop 
     getScript('https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js', function() {
       if (typeof jQuery=='undefined') { 
       } else {
-        SNAC.related.pop();
+        SNAC.related.setstuff();
       }
     });
   } else { 
-    SNAC.related.pop();
+    SNAC.related.setstuff();
   }
 })();
 
