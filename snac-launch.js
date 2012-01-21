@@ -1,4 +1,4 @@
-/* set up the CDL.DSC namespace object if it does not exist yet 
+/* set up the SNAC.related namespace object if it does not exist yet 
  */
 
 var SNAC = (typeof SNAC !== 'undefined') ? SNAC : {} ;
@@ -6,9 +6,7 @@ SNAC.related = (typeof SNAC.related !== 'undefined') ? SNAC.related : {};
 
 
 SNAC.related.pop = (typeof SNAC.related.pop !== 'undefined') ? SNAC.related.pop : function(){
-  console.log($('body'));
   nd = $('<div title="related" style="position: absolute; bottom:0; right:0; border: 1px solid; font-size: 250%; width: 1em; text-align: center; border: 1px solid;">&#x0FC2;</div>');
-  console.log($('body').append(nd));
 };
 
 (function() {
