@@ -2,6 +2,10 @@
 // @name snac-related-widget
 // @description show related collections
 // @match http://oac.cdlib.org/findaid/*
+// @match http://www.oac.cdlib.org/findaid/*
+// @match http://findingaids.loc.gov/*
+// @match http://nwda-db.wsulibs.wsu.edu/findaid*
+// @match http://ead.lib.virginia.edu/*
 // @namespace https://github.com/tingletech/snac-related-widget
 // @version 0.0.1
 // ==/UserScript==
