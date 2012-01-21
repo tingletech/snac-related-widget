@@ -9,7 +9,7 @@
 var body = document.body; 
 var script = document.createElement('script');
 script.type = 'text/javascript';
-script.src = "./snac-launch.js";
+script.src = "https://raw.github.com/tingletech/snac-related-widget/master/snac-launch.js";
 body.appendChild(script);
 
 
