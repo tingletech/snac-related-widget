@@ -6,9 +6,17 @@ SNAC.related = (typeof SNAC.related !== 'undefined') ? SNAC.related : {};
 
 /* the action happens from the bottom up in source order */
 
-/* add the div with the snac trigger */
+/* tooltip */
+SNAC.related.tooltip = (typeof SNAC.related.tooltip !== 'undefined') ? SNAC.related.tooltip : function(){
+  l = $('#logo-0fc2');
+  l.tooltip();
+  // s = $('<style>.tooltip { border: 1px dashed;}</style>');
+  // $('head').append(s);
+};
+
+/* add the div with the snac trigger; check for tooltip */
 SNAC.related.addDiv = (typeof SNAC.related.addDiv !== 'undefined') ? SNAC.related.addDiv : function(){
-  nd = $('<button title="related collections">&#x0FC2;</button>');
+  nd = $('<button id="logo-0fc2" title="related collections">&#x0FC2;</button>');
   nd.css({
     position: "fixed", 
     bottom: 0, 
@@ -22,7 +30,13 @@ SNAC.related.addDiv = (typeof SNAC.related.addDiv !== 'undefined') ? SNAC.relate
   nd.button();
   // nd.button({icons: {primary: 'ui-icon-circle-triangle-w'}});
   // jQuery and jQueryUI are set up here
-  
+  if (typeof jQuery.tooltip == 'undefined') {
+    jQuery.getScript('http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js',function(){
+      SNAC.related.tooltip();
+    });
+  } else {
+      SNAC.related.tooltip();
+  }
 };
 
 SNAC.related.setstuff = (typeof SNAC.related.setstuff !== 'undefined') ? SNAC.related.setstuff : function(){
