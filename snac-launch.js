@@ -6,12 +6,10 @@ SNAC.related = (typeof SNAC.related !== 'undefined') ? SNAC.related : {};
 
 /* the action happens from the bottom up in source order */
 
-/* tooltip */
-SNAC.related.tooltip = (typeof SNAC.related.tooltip !== 'undefined') ? SNAC.related.tooltip : function(){
-  l = $('#logo-0fc2');
-  l.tooltip();
-  // s = $('<style>.tooltip { border: 1px dashed;}</style>');
-  // $('head').append(s);
+
+SNAC.related.stash = (typeof SNAC.related.stash !== 'undefined') ? SNAC.related.stash : function(){
+  //
+  // alert("x");
 };
 
 /* add the div with the snac trigger; check for tooltip */
@@ -28,14 +26,30 @@ SNAC.related.addDiv = (typeof SNAC.related.addDiv !== 'undefined') ? SNAC.relate
   });
   $('body').append(nd);
   nd.button();
+  // set up SNAC frame
+  snac = $('<div/>');
+  snac.dialog({ 
+    autoOpen: false, 
+    title: 'Archival Context',
+    position: ['right', 'bottom']
+  }); 
+  // click handler
+  nd.click(function(){
+    if (!snac.dialog('isOpen')) { 
+      snac.dialog('open');
+    } else {
+      snac.dialog('close');
+    }
+  });
+
   // nd.button({icons: {primary: 'ui-icon-circle-triangle-w'}});
   // jQuery and jQueryUI are set up here
   if (typeof jQuery.tooltip == 'undefined') {
-    jQuery.getScript('http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js',function(){
-      SNAC.related.tooltip();
+    jQuery.getScript('./jquery.mustache.js',function(){
+      SNAC.related.stash();
     });
   } else {
-      SNAC.related.tooltip();
+      SNAC.related.stash();
   }
 };
 
