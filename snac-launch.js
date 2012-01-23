@@ -58,6 +58,18 @@ SNAC.related.addDiv = (typeof SNAC.related.addDiv !== 'undefined') ? SNAC.relate
 
 SNAC.related.grabURL = (typeof SNAC.related.grabURL !== 'undefined') ? SNAC.related.grabURL : function(){
   // this just works for OAC; will need different searches for the different sources
+  // <meta name="DC.identifier" content="http://hdl.loc.gov/loc.music/eadmus.mu010023"
+  var hostname = window.location.hostname
+  // library of congress
+  if (hostname.substr(hostname.length-7)==='loc.gov') {
+    return $('meta[name="DC.identifier"]').content;
+  }
+  // NWDA
+  if (hostname.substr(hostname.length-7)==='wsu.edu') {
+    return window.location;
+  }
+  // Virginia Heritage
+  // otherwise OAC
   return $('div.permlink a')[0].href;
 };
 
@@ -65,14 +77,11 @@ SNAC.related.checkSNAC = (typeof SNAC.related.checkSNAC !== 'undefined') ? SNAC.
   // URL of this page
   // url = "http://www.oac.cdlib.org/findaid/ark:/13030/kt0f59q1h4"
   url = SNAC.related.grabURL();  
-  console.log(url);
   // URL of the SNAC query
   url = "http://archive1.village.virginia.edu:8012/rex/snac/indices/sourceEADurlIndex?key=creatorOf&value=" + url
-  console.log(url);
   // JSON to JSONP Bridge
   // http://pipes.yahoo.com/pipes/pipe.info?_id=332d9216d8910ba39e6c2577fd321a6a
   url = "http://pipes.yahoo.com/pipes/pipe.run?u="+ encodeURIComponent(url) + "&_id=332d9216d8910ba39e6c2577fd321a6a&_render=json&_callback=?"
-  console.log(url);
 
   // check if there is a result in SNAC
   $.getJSON(url, function(data) {
