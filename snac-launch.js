@@ -60,10 +60,9 @@ SNAC.related.grabURL = (typeof SNAC.related.grabURL !== 'undefined') ? SNAC.rela
   // this just works for OAC; will need different searches for the different sources
   // <meta name="DC.identifier" content="http://hdl.loc.gov/loc.music/eadmus.mu010023"
   var hostname = window.location.hostname
-  console.log(hostname);
-  console.log(hostname.substr(hostname.length-7));
   // library of congress
   if (hostname.substr(hostname.length-7)==='loc.gov') {
+    console.log($('meta[name="DC.identifier"]'));
     return $('meta[name="DC.identifier"]').content;
   }
   // NWDA
