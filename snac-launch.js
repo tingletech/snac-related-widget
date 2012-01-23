@@ -48,7 +48,7 @@ SNAC.related.addDiv = (typeof SNAC.related.addDiv !== 'undefined') ? SNAC.relate
   // nd.button({icons: {primary: 'ui-icon-circle-triangle-w'}});
   // jQuery and jQueryUI are set up here
   if (typeof jQuery.mustache == 'undefined') {
-    jQuery.getScript('//raw.github.com/tingletech/snac-related-widget/master/jquery.mustache.js',function(){
+    jQuery.getScript('https://raw.github.com/tingletech/snac-related-widget/master/jquery.mustache.js',function(){
       SNAC.related.stash(results);
     });
   } else {
