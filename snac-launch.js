@@ -62,8 +62,7 @@ SNAC.related.grabURL = (typeof SNAC.related.grabURL !== 'undefined') ? SNAC.rela
   var hostname = window.location.hostname
   // library of congress
   if (hostname.substr(hostname.length-7)==='loc.gov') {
-    console.log($('meta[name="DC.identifier"]'));
-    return $('meta[name="DC.identifier"]').content;
+    return $('meta[name="DC.identifier"]')[0].content;
   }
   // NWDA
   if (hostname.substr(hostname.length-7)==='wsu.edu') {
