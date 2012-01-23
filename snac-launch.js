@@ -32,6 +32,7 @@ SNAC.related.stash = (typeof SNAC.related.stash !== 'undefined') ? SNAC.related.
 
 /* we have results! add a div to hold the button */
 SNAC.related.addDiv = (typeof SNAC.related.addDiv !== 'undefined') ? SNAC.related.addDiv : function(results){
+  document.body.style.width = screen.availWidth;
   nd = $('<button id="logo-0fc2" title="related collections">&#x0FC2;</button>');
   nd.css({
     position: "fixed", 
