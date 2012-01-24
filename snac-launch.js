@@ -86,8 +86,8 @@ SNAC.related.checkSNAC = (typeof SNAC.related.checkSNAC !== 'undefined') ? SNAC.
 
   // check if there is a result in SNAC
   $.getJSON(url, function(data) {
-    if (data.value.items[0].results) {
-      SNAC.related.addDiv(data.value.items[0].results);
+    if (data.results) {
+      SNAC.related.addDiv(data.results[0]);
     }
   });
 };
