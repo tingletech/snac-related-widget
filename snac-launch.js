@@ -69,7 +69,7 @@ SNAC.related.grabURL = (typeof SNAC.related.grabURL !== 'undefined') ? SNAC.rela
   // http://nwda-db.wsulibs.wsu.edu/findaid/ark:/80444/xv42415
   // <a target="_blank" href="/print/ark:/80444/xv42415" rel="nofollow" target="_top">
   if (hostname.substr(hostname.length-7)==='wsu.edu') {
-    var printLink = $('a[href^="/print/"]').href;
+    var printLink = $('a[href^="/print/"]')[0].href;
     var ark = printLink.substr(printLink.length-18);
     return "http://nwda-db.wsulibs.wsu.edu/findaid/" + ark ;
   }
