@@ -66,8 +66,12 @@ SNAC.related.grabURL = (typeof SNAC.related.grabURL !== 'undefined') ? SNAC.rela
   }
   // NWDA
   // http://nwda-db.wsulibs.wsu.edu/nwda-search/fstyle.aspx?doc=MTLrs197.xml&t=k&q=fred
+  // http://nwda-db.wsulibs.wsu.edu/findaid/ark:/80444/xv42415
+  // <a target="_blank" href="/print/ark:/80444/xv42415" rel="nofollow" target="_top">
   if (hostname.substr(hostname.length-7)==='wsu.edu') {
-    return window.location;
+    var printLink = $('a[href^="/print/"]').href;
+    var ark = printLink.substr(printLink.length-18);
+    return "http://nwda-db.wsulibs.wsu.edu/findaid/" + ark ;
   }
   // TODO: Virginia Heritage
   // otherwise OAC
