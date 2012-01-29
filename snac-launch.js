@@ -16,8 +16,9 @@ SNAC.related.stash = (typeof SNAC.related.stash !== 'undefined') ? SNAC.related.
   snac = $(snac);
   snac.dialog({ 
     autoOpen: false, 
-    title: 'related',
-    position: ['right', 'bottom']
+    title: 'archival context',
+    width: '30em',
+    position: ['right', 'middle']
   }); 
   // click handler
   nd.click(function(){
@@ -33,7 +34,8 @@ SNAC.related.stash = (typeof SNAC.related.stash !== 'undefined') ? SNAC.related.
 /* we have results! add a div to hold the button */
 SNAC.related.addDiv = (typeof SNAC.related.addDiv !== 'undefined') ? SNAC.related.addDiv : function(results){
   document.body.style.width = screen.availWidth;
-  nd = $('<button id="logo-0fc2" title="related collections">&#x0FC2;</button>');
+  document.body.style['overflow-x'] = "hidden";
+  nd = $('<div id="logo-0fc2" title="archival context">&#x0FC2;</div>');
   nd.css({
     position: "fixed", 
     bottom: 0, 
@@ -41,7 +43,7 @@ SNAC.related.addDiv = (typeof SNAC.related.addDiv !== 'undefined') ? SNAC.relate
     right: 0 /* , 
     border: '1px solid',
     width: '1em', 
-    'text-align': 'center'  */
+    'text-align': 'center' */
   });
   $('body').append(nd);
   nd.button();
@@ -84,7 +86,7 @@ SNAC.related.checkSNAC = (typeof SNAC.related.checkSNAC !== 'undefined') ? SNAC.
   // url = "http://www.oac.cdlib.org/findaid/ark:/13030/kt0f59q1h4"
   url = SNAC.related.grabURL();  
   // URL of the SNAC query
-  url = "http://archive1.village.virginia.edu:8012/rex/snac/indices/sourceEADurlIndex?key=creatorOf&value=" + url
+  url = "http://archive1.village.virginia.edu:8012/rex/snac/indices/sourceEADurlIndex?key=referencedIn&value=" + url
   // 
   url = url + "&callback=?"
 

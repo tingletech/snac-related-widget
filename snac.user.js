@@ -3,6 +3,8 @@
 // @description show related collections
 // @match http://oac.cdlib.org/findaid/*
 // @match http://www.oac.cdlib.org/findaid/*
+// @match http://oac.cdlib.org/view?docId=*
+// @match http://www.oac.cdlib.org/view?docId=*
 // @match http://findingaids.loc.gov/*
 // @match http://nwda-db.wsulibs.wsu.edu/findaid*
 // @match http://ead.lib.virginia.edu/*
