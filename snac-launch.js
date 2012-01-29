@@ -9,10 +9,15 @@ SNAC.related = (typeof SNAC.related !== 'undefined') ? SNAC.related : {};
 /* format the result with a {{moustashe}} template */
 SNAC.related.stash = (typeof SNAC.related.stash !== 'undefined') ? SNAC.related.stash : function(results){
   // set up SNAC frame
-  template = '<div><div><a href="http://socialarchive.iath.virginia.edu/xtf/view?docId={{filename}}">{{identity}}</a></div>';
-  template += '{{#dbpedia}}{{dbpedia}}\n{{/dbpedia}}';
-  template += '{{#viaf}}{{viaf}}\n{{/viaf}}</div>';
-  var snac = $.mustache(template, results);
+  template = '<div><a href="http://socialarchive.iath.virginia.edu/xtf/view?docId={{filename}}">{{identity}}</a> ';
+  template += '{{#dbpedia}}{{dbpedia}}\n{{/dbpedia}} ';
+  template += '{{#viaf}}{{viaf}}\n{{/viaf}}</div>\n';
+  var snac = "<div>";
+  for (var i = 0; i < results.length; i++) {
+    snac += $.mustache(template, results[i]);
+  }
+  snac += "</div>";
+  console.log(snac)
   snac = $(snac);
   snac.dialog({ 
     autoOpen: false, 
@@ -34,7 +39,7 @@ SNAC.related.stash = (typeof SNAC.related.stash !== 'undefined') ? SNAC.related.
 /* we have results! add a div to hold the button */
 SNAC.related.addDiv = (typeof SNAC.related.addDiv !== 'undefined') ? SNAC.related.addDiv : function(results){
   document.body.style.width = screen.availWidth;
-  document.body.style['overflow-x'] = "hidden";
+  // document.body.style['overflow-x'] = "hidden";
   nd = $('<div id="logo-0fc2" title="archival context">&#x0FC2;</div>');
   nd.css({
     position: "fixed", 
@@ -93,7 +98,7 @@ SNAC.related.checkSNAC = (typeof SNAC.related.checkSNAC !== 'undefined') ? SNAC.
   // check if there is a result in SNAC
   $.getJSON(url, function(data) {
     if (data.results) {
-      SNAC.related.addDiv(data.results[0]);
+      SNAC.related.addDiv(data.results);
     }
   });
 };
