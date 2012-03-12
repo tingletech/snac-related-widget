@@ -4,24 +4,25 @@
 var SNAC = (typeof SNAC !== 'undefined') ? SNAC : {} ;
 SNAC.related = (typeof SNAC.related !== 'undefined') ? SNAC.related : {};
 
+SNAC.rexsterServer = (typeof SNAC.rexsterServer !== 'undefined') ? SNAC.rexsterServer : 'http://archive1.village.virginia.edu:8012/rex9/graphs';
+
 /* the action happens from the bottom up in source order */
 
 /* format the result with a {{moustashe}} template */
 SNAC.related.stash = (typeof SNAC.related.stash !== 'undefined') ? SNAC.related.stash : function(results){
   // set up SNAC frame
-  template = '<div><a href="http://socialarchive.iath.virginia.edu/xtf/view?docId={{filename}}">{{identity}}</a> ';
-  template += '{{#dbpedia}}{{dbpedia}}\n{{/dbpedia}} ';
-  template += '{{#viaf}}{{viaf}}\n{{/viaf}}</div>\n';
+  template = '<div><a href="http://socialarchive.iath.virginia.edu/xtf/view?docId={{filename}}">{{name}}</a></div> ';
+  // template += '{{#dbpedia}}{{dbpedia}}\n{{/dbpedia}} ';
+  // template += '{{#viaf}}{{viaf}}\n{{/viaf}}</div>\n';
   var snac = "<div>";
   for (var i = 0; i < results.length; i++) {
     snac += $.mustache(template, results[i]);
   }
   snac += "</div>";
-  console.log(snac)
   snac = $(snac);
   snac.dialog({ 
     autoOpen: false, 
-    title: 'archival context',
+    title: 'archival context network',
     width: '30em',
     position: ['right', 'middle']
   }); 
@@ -40,7 +41,7 @@ SNAC.related.stash = (typeof SNAC.related.stash !== 'undefined') ? SNAC.related.
 SNAC.related.addDiv = (typeof SNAC.related.addDiv !== 'undefined') ? SNAC.related.addDiv : function(results){
   document.body.style.width = screen.availWidth;
   // document.body.style['overflow-x'] = "hidden";
-  nd = $('<div id="logo-0fc2" title="archival context">&#x0FC2;</div>');
+  nd = $('<div style="background-image:url(\'http://socialarchive.iath.virginia.edu/xtf/cpf2html/dolls.png\')" id="logo-0fc2" title="archival context">&#160;context</div>');
   nd.css({
     position: "fixed", 
     bottom: 0, 
@@ -86,19 +87,29 @@ SNAC.related.grabURL = (typeof SNAC.related.grabURL !== 'undefined') ? SNAC.rela
   return $('div.permlink a')[0].href;
 };
 
+SNAC.related.lookUpFriends = (typeof SNAC.related.lookUpFriends !== 'undefined') ? SNAC.related.lookUpFriends : function(results){
+  // will want to put this in a loop if there were multiple creators?
+  var id = results[0]['_id'];
+  var url = SNAC.rexsterServer + "/snac/vertices/" + id + "/snac/theJit?callback=?"
+  $.getJSON(url, function(data) {
+     SNAC.related.addDiv(data);
+  });
+};
+
 SNAC.related.checkSNAC = (typeof SNAC.related.checkSNAC !== 'undefined') ? SNAC.related.checkSNAC : function(){
   // URL of this page
   // url = "http://www.oac.cdlib.org/findaid/ark:/13030/kt0f59q1h4"
-  url = SNAC.related.grabURL();  
+  var url = SNAC.related.grabURL();  
   // URL of the SNAC query
-  url = "http://archive1.village.virginia.edu:8012/rex/snac/indices/sourceEADurlIndex?key=referencedIn&value=" + url
+  url = SNAC.rexsterServer + "/snac/indices/sourceEADurlIndex?key=creatorOf&value=" + url
   // 
   url = url + "&callback=?"
 
   // check if there is a result in SNAC
   $.getJSON(url, function(data) {
     if (data.results) {
-      SNAC.related.addDiv(data.results);
+      // grab out the vertex number
+      SNAC.related.lookUpFriends(data.results);
     }
   });
 };
