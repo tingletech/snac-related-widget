@@ -1,10 +1,7 @@
 # SNAC Widget
 
 ## Use Case
-This repository has front end code for the related items widget.
-
-## Current State
-Under development, it does not do anything yet.  
+This repository has front end code for the related items widget.  The widget can be run as a user script.
 
 ## User Script
 
