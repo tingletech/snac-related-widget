@@ -4,7 +4,7 @@
 var SNAC = (typeof SNAC !== 'undefined') ? SNAC : {} ;
 SNAC.related = (typeof SNAC.related !== 'undefined') ? SNAC.related : {};
 
-SNAC.rexsterServer = (typeof SNAC.rexsterServer !== 'undefined') ? SNAC.rexsterServer : 'http://shannon.village.virginia.edu/rex';
+SNAC.rexsterServer = (typeof SNAC.rexsterServer !== 'undefined') ? SNAC.rexsterServer : 'http://socialarchive.iath.virginia.edu/rex';
 
 /* the action happens from the bottom up in source order */
 
